@@ -2,6 +2,7 @@
 ## --------------------- Non-Solving Check ---------------------- ##
 ## -------------------------------------------------------------- ##
 
+
 def adjacent_valence_two(G):
 
     for v in G.vertices():
@@ -10,6 +11,7 @@ def adjacent_valence_two(G):
                 if(G.degree(w) == 2):
                     return True
     return False
+
 
 def non_solving_check(G):
 
@@ -63,17 +65,6 @@ def diff_graph(G, block_check=False):
         D = diff(E, V)
 
     return D
-
-
-# def complete_diffs(G):
-
-#     diffs = {}
-#     for S in Subsets(G.vertices()):
-
-#         if(len(S)>2):
-#             diffs[str(S)] = diff_graph(G.subgraph(S))
-
-#     return diffs
 
 
 def diff_criterion_vertices(G):
@@ -206,7 +197,6 @@ def move_completion(G0, verbose=False):
 ## -------------------------------------------------------------- ##
 
 
-
 def degrees_of_freedom(graph):
 
     G = [(g[0], g[1]) for g in graph.edges()]
@@ -273,7 +263,7 @@ def degrees_of_freedom(graph):
     s = {}
     for i in range(N):
         for d in range(4):
-            exec('s[c%s%s]=KK.random_element(100,10)' %(d, i)) # better random
+            exec('s[c%s%s]=KK.random_element(100,10)' %(d, i))  # better random
             constraints = constraints.subs(s)
 
     # Compute dimension
@@ -316,34 +306,3 @@ def compatibility(M1, M2, C):
                m10 *c0 - m00 *c1 + m33 *c1 - m13 *c3])
 
     return I
-
-
-# ideal for M = kId + cv^T
-# KK = QQ
-# R = PolynomialRing(KK, 'm00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33, c0, c1,c2,c3,v0,v1,v2,v3,k')
-# R.inject_variables()
-
-# M = Matrix([[m00+k, m01, m02, m03],
-#             [m10, m11+k, m12, m13],
-#             [m20, m21, m22+k, m23],
-#             [m30, m31, m32, m33+k]])
-
-# C = Matrix([[c0,c1,c2,c3]]).T
-# V = Matrix([[v0,v1,v2,v3]]).T
-
-# I = ideal((M-C*V.T).list())
-# I = I.elimination_ideal([v0,v1,v2,v3])
-# I = I.elimination_ideal(k)
-
-
-# # I1 = ideal([f for f in I.gens() if(f.degree()==2)])
-
-# I2 = ideal([m31*c2 - m21*c3, m30*c2 - m20*c3, m32*c1 - m12*c3, m31*c1 - m32*c2 - m11*c3 + m22*c3,
-#            m30*c1 - m10*c3, m23*c1 - m13*c2, m22*c1 - m33*c1 - m12*c2 + m13*c3,
-#            m21*c1 - m11*c2 + m33*c2 - m23*c3, m20*c1 - m10*c2, m32*c0 - m02*c3,
-#            m31*c0 - m01*c3, m30*c0 - m32*c2 - m00*c3 + m22*c3, m23*c0 - m03*c2,
-#            m22*c0 - m33*c0 - m02*c2 + m03*c3, m21*c0 - m01*c2, m20*c0 - m00*c2 + m33*c2 - m23*c3,
-#            m13*c0 - m03*c1, m12*c0 - m02*c1, m11*c0 - m33*c0 - m01*c1 + m03*c3,
-#            m10*c0 - m00*c1 + m33*c1 - m13*c3])
-
-# I2.primary_decomposition()[1]==I
